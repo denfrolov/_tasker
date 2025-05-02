@@ -4,6 +4,7 @@ $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
 define("NO_KEEP_STATISTIC", true);
 define("NOT_CHECK_PERMISSIONS", true);
 define('CHK_EVENT', true);
+
 require $_SERVER['DOCUMENT_ROOT'] . '/_tasker/init.php';
 
 $count = 10;
