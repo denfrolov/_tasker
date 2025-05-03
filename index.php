@@ -41,11 +41,13 @@ require 'init.php';
 	let consoleData = {};
 	taskEls.forEach(function (taskEl) {
 		taskEl.addEventListener('click', function () {
-			consoleData = {};
 			taskEls.forEach(function (taskEl) {
 				taskEl.classList.add('active');
 			});
-			console.clear();
+			setTimeout(function () {
+				console.clear();
+				consoleData = {};
+			}, 300)
 			let xhr = new XMLHttpRequest();
 			xhr.open('GET', '/_tasker/run.php?fileSrc=' + taskEl.getAttribute('data-path'), true);
 			xhr.send();
