@@ -39,15 +39,14 @@ require 'init.php';
 <script>
 	let taskEls = document.querySelectorAll('.task');
 	let consoleData = {};
+	let clearConsole = false;
 	taskEls.forEach(function (taskEl) {
 		taskEl.addEventListener('click', function () {
+			console.clear();
+			clearConsole = true;
 			taskEls.forEach(function (taskEl) {
 				taskEl.classList.add('active');
 			});
-			setTimeout(function () {
-				console.clear();
-				consoleData = {};
-			}, 300)
 			let xhr = new XMLHttpRequest();
 			xhr.open('GET', '/_tasker/run.php?fileSrc=' + taskEl.getAttribute('data-path'), true);
 			xhr.send();
@@ -64,19 +63,19 @@ require 'init.php';
 				for (let dataKey in data) {
 					let dataItem = data[dataKey];
 					if (!consoleData[dataKey]) {
-						console.log(dataItem);
-						if (dataItem[Object.keys(dataItem)[0]] === 'finish') {
+						if (dataItem === 'finish') {
 							taskEls.forEach(function (taskEl) {
 								taskEl.classList.remove('active');
 							});
 						}
+						console.log(dataItem);
+						consoleData[dataKey] = dataItem
 					}
 				}
-				consoleData = data
 			}
 		};
 		xhr.send();
-	}, 300)
+	}, 1000)
 
 </script>
 </html>

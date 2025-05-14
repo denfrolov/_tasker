@@ -20,8 +20,8 @@ class Tasker
 		} else {
 			$arLog = json_decode(file_get_contents(self::$tasksDir . '../log.json'), true);
 		}
-		$arLog[] = [date('d.m.Y H:i:s') => $addItem];
-		$res = file_put_contents(self::$tasksDir . '../log.json', json_encode($arLog, JSON_PARTIAL_OUTPUT_ON_ERROR));
+		$arLog[date('d.m.Y H:i:s_') . rand(0, 9999)] = $addItem;
+		file_put_contents(self::$tasksDir . '../log.json', json_encode($arLog, JSON_PARTIAL_OUTPUT_ON_ERROR));
 	}
 }
 
